@@ -3,12 +3,22 @@ services:
   blockbookznz:
     build: .
     container_name: znz_blockbook
+    networks:
+      - blockbookznz
+    environment:
+      - RPC_URL=http://znz_blockbook:8022  # Use container name as hostname
     volumes:
       - ./blockbook/znz:/opt/coins/blockbook/znz
       - ./blockbook/db:/opt/coins/data/znz/blockbook/db
       - ./backend:/opt/coins/data/znz/
+    command: >
+      bash -c "sed -i 's/rpcallowip=172.0.0.0/rpcallowip=znz_blockbook\/8/g' /opt/coins/nodes/znz/znz.conf &&
+               sed -i 's|\"rpc_url\": \"http://127.0.0.1:8022\"|\"rpc_url\": \"http://znz_blockbook:8022\"|g' /opt/coins/blockbook/znz/config/blockchaincfg.json "
+
     ports:
       - 9013:9013
       - 9113:9113
       - 8022:8022
-networks: {}
+networks:
+  blockbookznz:
+    driver: bridge
