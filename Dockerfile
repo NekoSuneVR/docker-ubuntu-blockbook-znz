@@ -18,8 +18,15 @@ COPY ./debs/backend-znz*.deb ./backend-znz.deb
 RUN apt install -y ./backend-znz.deb
 RUN apt install -y ./blockbook-znz.deb
 
+# Create necessary directories for data and logs
+RUN mkdir -p /opt/coins/data/znz/blockbook/db \
+             /opt/coins/data/znz/backend \
+             /opt/coins/blockbook/znz/logs \
+             /opt/coins/blockbook/znz/cert
+
 # Copy the config file
-COPY ./blockchain_cfg.json /opt/coins/blockbook/znz/config/blockchaincfg.json
+COPY ./configs/blockchain_cfg.json /opt/coins/blockbook/znz/config/blockchaincfg.json
+COPY ./configs/znz.conf /opt/coins/nodes/znz/znz.conf
 
 EXPOSE 9013 9113 8022
 
