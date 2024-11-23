@@ -11,7 +11,7 @@ RUN apt-get install -y curl sudo
 RUN sudo apt-get install -y build-essential
 
 # Copy the pre-built .deb files
-COPY ./backend-znz*.deb backend-znz.deb
+COPY ./backend/backend-znz*.deb backend-znz.deb
 
 # Install the debs
 RUN apt install -y ./backend-znz.deb
