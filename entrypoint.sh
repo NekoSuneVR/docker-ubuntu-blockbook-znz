@@ -7,10 +7,11 @@
   -pid=/run/zenzod.pid &
 
 # Wait for the Zenzo backend to be ready
-echo "Waiting for Zenzo backend to initialize..."
-until curl -s http://localhost:8022 >/dev/null; do
-    sleep 5
+echo "Waiting for Zenzo backend to be available on port 8022..."
+while ! nc -z 127.0.0.1 8022; do
+    sleep 1
 done
+echo "Zenzo backend is ready!"
 
 # Start Blockbook
 /opt/coins/blockbook/znz/bin/blockbook \
