@@ -1,0 +1,14 @@
+{
+    "coin_name": "ZNZ",
+    "coin_shortcut": "ZNZ",
+    "coin_label": "Zenzo",
+    "rpc_url": "http://127.0.0.1:8022",
+    "rpc_user": "rpc",
+    "rpc_pass": "pivxrpc",
+    "rpc_timeout": 25,
+    "parse": true,
+    "message_queue_binding": "tcp://127.0.0.1:38313",
+    "subversion": "",
+    "address_format": "",
+    "block_addresses_to_keep": 300
+}

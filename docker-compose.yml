@@ -1,0 +1,12 @@
+blockbook-node:
+  build: .
+  dockerfile: Dockerfile
+  #image: christroutner/blockbook-0.3.2-bch-mainnet
+  container_name: blockbook
+  ports:
+    - "9013:9013"
+    - "9113:9113"
+  volumes:
+    - ./data:/opt/coins/data/znz/blockbook/db
+    - ./logs:/opt/coins/blockbook/znz/logs
+  restart: always
