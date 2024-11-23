@@ -13,7 +13,7 @@ RUN sudo apt-get install -y nodejs build-essential
 COPY ./dummyapp.js dummyapp.js
 
 # Copy the pre-built .deb files
-COPY ./blockbook-znz*.deb blockbook-znz.deb
+COPY ./blockbook-znz*.deb ./blockbook-znz.deb
 
 # Install the debs
 RUN ls .
