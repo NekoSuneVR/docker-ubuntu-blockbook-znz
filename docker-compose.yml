@@ -1,15 +1,39 @@
-version: "3.9"
+version: '3.8'
+
 services:
-  blockbooknode:
-    build: .
-    #dockerfile: Dockerfile
-    #image: christroutner/blockbook-0.3.2-bch-mainnet
-    container_name: blockbookznz
+  backend:
+    build:
+      context: ./backend
+    container_name: znz_backend
+    volumes:
+      - ./backend:/opt/coins/data/znz/
+    ports:
+      - "8022:8022"
+    command: >
+      /opt/coins/nodes/znz/bin/zenzod -datadir=/opt/coins/data/znz/backend 
+             -conf=/opt/coins/nodes/znz/znz.conf 
+             -pid=/run/znz/znz.pid
+    depends_on:
+      - blockbook
+
+  blockbook:
+    build:
+      context: ./blockbook
+    container_name: znz_blockbook
+    volumes:
+      - ./blockbook/znz:/opt/coins/blockbook/znz
+      - ./blockbook/db:/opt/coins/data/znz/blockbook/db
     ports:
       - 9013:9013
       - 9113:9113
-    volumes:
-      - ./data:/opt/coins/data/znz/blockbook/db
-      - ./logs:/opt/coins/blockbook/znz/logs
-    restart: always
+    command: >
+      /opt/coins/blockbook/znz/bin/blockbook -blockchaincfg=/opt/coins/blockbook/znz/config/blockchaincfg.json
+                -datadir=/opt/coins/data/znz/blockbook/db
+                -sync
+                -internal=:9013
+                -public=:9113
+                -certfile=/opt/coins/blockbook/znz/cert/blockbook
+                -explorer= -log_dir=/opt/coins/blockbook/znz/logs
+                -workers=1
+
 networks: {}
