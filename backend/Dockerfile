@@ -14,7 +14,6 @@ RUN sudo apt-get install -y build-essential
 COPY ./backend-znz*.deb backend-znz.deb
 
 # Install the debs
-RUN ls .
 RUN apt install -y ./backend-znz.deb
 
 EXPOSE 8022
