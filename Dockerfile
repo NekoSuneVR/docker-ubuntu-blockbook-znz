@@ -5,7 +5,7 @@ WORKDIR /root
 
 RUN apt-get update -y
 
-RUN apt-get install -y curl sudo
+RUN apt-get install -y curl sudo netcat
 
 # Install Node.js
 RUN sudo apt-get install -y build-essential
