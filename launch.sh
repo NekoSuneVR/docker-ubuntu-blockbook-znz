@@ -3,6 +3,8 @@
 # Blockbook must be run from this directory
 cd /opt/coins/blockbook/znz
 
+systemctl start backend-znz
+
 # Start blockbook
 /opt/coins/blockbook/znz/bin/blockbook -blockchaincfg=/opt/coins/blockbook/znz/config/blockchaincfg.json \
 -datadir=/opt/coins/data/znz/blockbook/db -sync -internal=:9013 -public=:9113 \
