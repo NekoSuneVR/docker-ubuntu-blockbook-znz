@@ -1,5 +1,5 @@
 FROM ubuntu:22.04
-MAINTAINER NekoSuneVR <nekosunevr@gmail.com>
+LABEL maintainer="NekoSuneVR <nekosunevr@gmail.com>"
 
 WORKDIR /root
 
